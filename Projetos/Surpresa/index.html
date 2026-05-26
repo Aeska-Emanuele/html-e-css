@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Convite</title>
+
+<style>
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5c6e0, #f8b195);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Container principal */
+.container{
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 500px;
+    color: rgb(10, 0, 0);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 10;
+    animation: aparecer 1.5s ease-in-out;
+}
+
+h1{
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ff6f91;
+}
+
+p{
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+h2{
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+/* Área dos botões */
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Estilo geral dos botões */
+.buttons button{
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+/* Botão SIM */
+.sim{
+    background: white;
+    color: #ff6f91;
+}
+
+.sim:hover{
+    transform: scale(1.1);
+}
+
+/* Botão NÃO */
+.nao{
+    background: #ff6f91;
+    color: white;
+    position: relative;
+}
+
+/* Mensagem final */
+.mensagem-final{
+    display: none;
+    margin-top: 25px;
+    font-size: 1.3rem;
+    animation: aparecer 1s ease-in-out;
+    color: #ff4f7b;
+    font-weight: bold;
+}
+
+/* Corações */
+.heart{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    transform: rotate(45deg);
+    animation: floatUp linear forwards;
+}
+
+.heart::before,
+.heart::after{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.heart::before{
+    top: -10px;
+    left: 0;
+}
+
+.heart::after{
+    left: -10px;
+    top: 0;
+}
+
+/* Animações */
+@keyframes floatUp{
+    from{
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+    }
+
+    to{
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+@keyframes aparecer{
+    from{
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 500px){
+
+    h1{
+        font-size: 2rem;
+    }
+
+    h2{
+        font-size: 1.2rem;
+    }
+
+    p{
+        font-size: 1rem;
+    }
+
+    .buttons{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .buttons button{
+        width: 80%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Oii minha Princesa! 💖</h1>
+
+    <p>
+        Eu não sei me expressar muito bem em palavras,
+        mas quero que saiba que amo muito você
+        e gostaria de te fazer um convite!
+    </p>
+
+    <h2>
+        Você aceita comemorar mais um Dia dos Namorados comigo? ✨
+    </h2>
+
+    <div class="buttons">
+        <button class="sim" onclick="aceitou()">
+            SIM!!! 💕
+        </button>
+
+        <button class="nao" id="NoBtn">
+            não
+        </button>
+    </div>
+
+    <div class="mensagem-final" id="mensagemfinal">
+    É claro que aceita KKKKK ❤️ <br><br>
+        Se prepare para ter uma noite incrível,
+        afinal... você estará comigo! 😘
+    </div>
+
+</div>
+
+<script>
+
+const noBtn = document.getElementById('NoBtn');
+const mensagemFinal = document.getElementById('mensagemfinal');
+
+/* Botão fugindo */
+noBtn.addEventListener('mouseover', () => {
+
+    alert('Não é uma opção 😌💖');
+
+    const randomX = Math.floor(Math.random() * (window.innerWidth - 100));
+    const randomY = Math.floor(Math.random() * (window.innerHeight - 50));
+
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
+});
+
+/* Clique no SIM */
+function aceitou(){
+
+    mensagemFinal.style.display = 'block';
+
+    for(let i = 0; i < 40; i++){
+
+        const heart = document.createElement('div');
+
+        heart.classList.add('heart');
+
+        heart.style.left = `${Math.random() * window.innerWidth}px`;
+
+        heart.style.top = `${window.innerHeight}px`;
+
+        heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+}
+
+</script>
+
+</body>
+</html>
